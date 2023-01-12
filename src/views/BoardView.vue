@@ -1,14 +1,29 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useStore } from '@/stores';
+
+interface Lists {
+  id: string;
+  title: string;
+  tasks: Tasks[];
+}
+
+interface Tasks {
+  id: string;
+  title: string;
+  content: string;
+}
 
 const toggle = ref(false);
+const store = useStore();
+const list = computed<Lists[]>(() => store.lists);
 </script>
 
 <template>
   <div class="bg-emerald-700 h-[100vh] w-full block overflow-x-auto overflow-y-hidden">
     <div id="board-wrapper" class="h-full w-full p-4 block overflow-auto">
       <div class="flex flex-row items-start">
-        <CardWrapper />
+        <CardWrapper v-for="card in list" :key="card.id" v-bind="card" />
         <!-- add new card -->
         <div
           class="bg-slate-200 block border rounded-sm p-2 mx-2 border-gray-500 w-[300px] cursor-pointer bg-opacity-70 hover:bg-opacity-90 min-w-[300px]"
