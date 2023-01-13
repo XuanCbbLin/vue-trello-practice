@@ -49,5 +49,13 @@ export const useStore = defineStore('store', () => {
     },
   ]);
 
-  return { lists };
+  const updateListTitle = (cardId: string = '', title: string = '') => {
+    const card = lists.value.find(list => list.id === cardId);
+
+    if (card) {
+      card.title = title;
+    }
+  };
+
+  return { lists, updateListTitle };
 });
