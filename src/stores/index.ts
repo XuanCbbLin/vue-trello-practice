@@ -1,4 +1,4 @@
-import { reactive } from 'vue';
+import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
 interface APILists {
@@ -14,7 +14,7 @@ interface Tasks {
 }
 
 export const useStore = defineStore('store', () => {
-  const lists: APILists[] = reactive([
+  const lists = ref<APILists[]>([
     {
       id: '61bblwnux0tlb1vp3qk',
       title: 'Hello Vue.js!',
