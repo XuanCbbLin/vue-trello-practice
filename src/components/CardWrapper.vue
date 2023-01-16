@@ -15,7 +15,8 @@
       v-on-click-outside="outsideEdit"
       class="border-none h-8 w-full p-1 resize-none overflow-hidden block"
     ></textarea>
-    <TaskItem />
+
+    <TaskItem v-for="task in tasks" :key="task.id" v-bind="task" />
 
     <AddNewTask />
   </div>
