@@ -1,5 +1,6 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
+import { uid } from '@/utils/uid';
 
 interface APILists {
   id: string;
@@ -57,5 +58,20 @@ export const useStore = defineStore('store', () => {
     }
   };
 
-  return { lists, updateListTitle };
+  // 新增任務
+  const addTask = (cardId: string = '', title: string = '') => {
+    if (!cardId || !title) return;
+
+    const card = lists.value.find(list => list.id === cardId);
+
+    if (card) {
+      card.tasks.push({
+        id: uid(),
+        title,
+        content: '',
+      });
+    }
+  };
+
+  return { lists, updateListTitle, addTask };
 });

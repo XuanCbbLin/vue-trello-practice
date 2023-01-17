@@ -18,7 +18,7 @@
 
     <TaskItem v-for="task in tasks" :key="task.id" v-bind="task" />
 
-    <AddNewTask />
+    <AddNewTask :id="props.id" />
   </div>
 </template>
 
