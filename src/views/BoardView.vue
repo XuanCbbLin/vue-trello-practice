@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { useStore } from '@/stores';
 import EditBox from '@/components/EditBox.vue';
-import type AddNewCard from '@/components/AddNewCard.vue';
+import AddNewCard from '@/components/AddNewCard.vue';
 
 interface Lists {
   id: string;
