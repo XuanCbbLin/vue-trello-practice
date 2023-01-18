@@ -110,5 +110,16 @@ export const useStore = defineStore('store', () => {
     }
   };
 
-  return { lists, updateListTitle, addTask, currentEditTask, openEditTask, closeEditTask, updateTask };
+  // 刪除任務
+  const deleteTask = (cardId: string = '', taskId: string = '') => {
+    const card = lists.value.find(list => list.id === cardId);
+
+    if (card) {
+      card.tasks = card.tasks.filter(task => task.id !== taskId);
+
+      closeEditTask();
+    }
+  };
+
+  return { lists, updateListTitle, addTask, currentEditTask, openEditTask, closeEditTask, updateTask, deleteTask };
 });

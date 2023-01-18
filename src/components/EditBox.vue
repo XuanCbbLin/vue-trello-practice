@@ -11,7 +11,12 @@
       ></textarea>
 
       <div class="text-right mt-4">
-        <button class="border bg-rose-500 text-white py-2 px-4 hover:bg-rose-700 mr-6">刪除</button>
+        <button
+          @click="deleteTask(currentEditTask.cardId, currentEditTask.id)"
+          class="border bg-rose-500 text-white py-2 px-4 hover:bg-rose-700 mr-6"
+        >
+          刪除
+        </button>
         <button
           @click="updateTask(currentEditTask.cardId, currentEditTask.id, title, content)"
           class="border bg-slate-200 py-2 px-4 hover:bg-slate-400 hover:text-slate-100"
@@ -28,7 +33,7 @@ import { ref, computed } from 'vue';
 import { useStore } from '@/stores';
 
 const store = useStore();
-const { updateTask, closeEditTask } = store;
+const { updateTask, closeEditTask, deleteTask } = store;
 const currentEditTask = computed(() => store.currentEditTask);
 const title = ref(currentEditTask.value.title);
 const content = ref(currentEditTask.value.content);
