@@ -121,5 +121,25 @@ export const useStore = defineStore('store', () => {
     }
   };
 
-  return { lists, updateListTitle, addTask, currentEditTask, openEditTask, closeEditTask, updateTask, deleteTask };
+  // 新增卡片
+  const addNewCard = (title = '') => {
+    if (!title) return;
+    lists.value.push({
+      id: uid(),
+      title,
+      tasks: [],
+    });
+  };
+
+  return {
+    lists,
+    updateListTitle,
+    addTask,
+    currentEditTask,
+    openEditTask,
+    closeEditTask,
+    updateTask,
+    deleteTask,
+    addNewCard,
+  };
 });
