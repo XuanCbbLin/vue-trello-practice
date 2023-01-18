@@ -50,6 +50,13 @@ export const useStore = defineStore('store', () => {
     },
   ]);
 
+  const currentEditTask = ref<{
+    cardId?: string | undefined;
+    content?: string | undefined;
+    id?: string | undefined;
+    title?: string | undefined;
+  }>({});
+
   const updateListTitle = (cardId: string = '', title: string = '') => {
     const card = lists.value.find(list => list.id === cardId);
 
@@ -73,5 +80,22 @@ export const useStore = defineStore('store', () => {
     }
   };
 
-  return { lists, updateListTitle, addTask };
+  // 開啟編輯燈箱
+  const openEditTask = (cardId: string, taskId: string) => {
+    const card = lists.value.find(list => list.id === cardId);
+    const task = card?.tasks.find(task => task.id === taskId);
+
+    // 傳入卡片 id, 及任務資訊
+    currentEditTask.value = {
+      cardId,
+      ...task,
+    };
+  };
+
+  // 清空 currentEditTask 代表關閉燈箱
+  const closeEditTask = () => {
+    currentEditTask.value = {};
+  };
+
+  return { lists, updateListTitle, addTask, currentEditTask, openEditTask, closeEditTask };
 });

@@ -16,7 +16,8 @@
       class="border-none h-8 w-full p-1 resize-none overflow-hidden block"
     ></textarea>
 
-    <TaskItem v-for="task in tasks" :key="task.id" v-bind="task" />
+    <!-- 點擊任務區塊開啟燈箱 -->
+    <TaskItem v-for="task in tasks" :key="task.id" v-bind="task" @click="openEditTask(props.id, task.id)" />
 
     <AddNewTask :id="props.id" />
   </div>
@@ -38,7 +39,7 @@ const title = ref<string>(props.title);
 const isTitleEditing = ref<boolean>(false);
 const target = ref();
 const store = useStore();
-const { updateListTitle } = store;
+const { updateListTitle, openEditTask } = store;
 
 useFocus(target, { initialValue: true });
 
