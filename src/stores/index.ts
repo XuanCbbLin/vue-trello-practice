@@ -97,5 +97,18 @@ export const useStore = defineStore('store', () => {
     currentEditTask.value = {};
   };
 
-  return { lists, updateListTitle, addTask, currentEditTask, openEditTask, closeEditTask };
+  // 更新 task 內容
+  const updateTask = (cardId: string = '', taskId: string = '', title: string = '', content: string = '') => {
+    const card = lists.value.find(list => list.id === cardId);
+    const task = card?.tasks.find(task => task.id === taskId);
+
+    if (task) {
+      task.title = title;
+      task.content = content;
+
+      closeEditTask();
+    }
+  };
+
+  return { lists, updateListTitle, addTask, currentEditTask, openEditTask, closeEditTask, updateTask };
 });
