@@ -2,11 +2,16 @@
   <div class="bg-emerald-700 h-[100vh] w-full block overflow-x-auto overflow-y-hidden">
     <div id="board-wrapper" class="h-full w-full p-4 block overflow-auto">
       <div class="flex flex-row items-start">
-        <!-- card -->
-        <CardWrapper v-for="card in list" :key="card.id" v-bind="card" />
-
-        <!-- add new card -->
-        <AddNewCard />
+        <draggable :list="list" group="card" itemKey="id" ghost-class="opacity-30" class="flex flex-row items-start">
+          <!--  CardWrapper -->
+          <template #item="{ element }">
+            <CardWrapper v-bind="element" />
+          </template>
+          <!-- AddNewCard -->
+          <template #footer>
+            <AddNewCard />
+          </template>
+        </draggable>
       </div>
     </div>
 
@@ -20,6 +25,7 @@ import { computed } from 'vue';
 import { useStore } from '@/stores';
 import EditBox from '@/components/EditBox.vue';
 import AddNewCard from '@/components/AddNewCard.vue';
+import draggable from 'vuedraggable';
 
 interface Lists {
   id: string;

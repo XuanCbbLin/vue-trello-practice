@@ -16,8 +16,12 @@
       class="border-none h-8 w-full p-1 resize-none overflow-hidden block"
     ></textarea>
 
-    <!-- 點擊任務區塊開啟燈箱 -->
-    <TaskItem v-for="task in tasks" :key="task.id" v-bind="task" @click="openEditTask(props.id, task.id)" />
+    <!-- 點擊任務區塊開啟燈箱和拖曳任務 -->
+    <draggable :list="tasks" group="task" itemKey="id" ghost-class="opacity-30">
+      <template #item="{ element }">
+        <TaskItem @click="openEditTask(props.id, element.id)" v-bind="element" />
+      </template>
+    </draggable>
 
     <AddNewTask :id="props.id" />
   </div>
@@ -28,6 +32,7 @@ import { ref, watch } from 'vue';
 import { useFocus } from '@vueuse/core';
 import { vOnClickOutside } from '@vueuse/components';
 import { useStore } from '@/stores';
+import draggable from 'vuedraggable';
 
 const props = defineProps<{
   id: string;
