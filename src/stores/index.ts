@@ -1,6 +1,7 @@
 import { ref, watch } from 'vue';
 import { defineStore } from 'pinia';
 import { uid } from '@/utils/uid';
+import { useRouter } from 'vue-router';
 
 interface APILists {
   id: string;
@@ -52,6 +53,7 @@ const defaultList = [
 export const useStore = defineStore('store', () => {
   const localStorageValue = localStorage.getItem('trello-lists');
   const lists = ref<APILists[]>(localStorageValue !== null ? JSON.parse(localStorageValue) : defaultList);
+  const router = useRouter();
 
   const currentEditTask = ref<{
     cardId?: string | undefined;
@@ -93,11 +95,14 @@ export const useStore = defineStore('store', () => {
       cardId,
       ...task,
     };
+
+    router.push(`/task/${cardId}/${taskId}`);
   };
 
   // 清空 currentEditTask 代表關閉燈箱
   const closeEditTask = () => {
     currentEditTask.value = {};
+    router.push(`/`);
   };
 
   // 更新 task 內容

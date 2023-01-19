@@ -16,14 +16,13 @@
     </div>
 
     <!-- lightbox -->
-    <EditBox v-if="currentEditTask?.id" />
+    <router-view />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useStore } from '@/stores';
-import EditBox from '@/components/EditBox.vue';
 import AddNewCard from '@/components/AddNewCard.vue';
 import draggable from 'vuedraggable';
 
@@ -41,5 +40,4 @@ interface Tasks {
 
 const store = useStore();
 const list = computed<Lists[]>(() => store.lists);
-const currentEditTask = computed(() => store.currentEditTask);
 </script>
