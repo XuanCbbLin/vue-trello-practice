@@ -26,18 +26,6 @@ import { useStore } from '@/stores';
 import AddNewCard from '@/components/AddNewCard.vue';
 import draggable from 'vuedraggable';
 
-interface Lists {
-  id: string;
-  title: string;
-  tasks: Tasks[];
-}
-
-interface Tasks {
-  id: string;
-  title: string;
-  content: string;
-}
-
 const store = useStore();
-const list = computed<Lists[]>(() => store.lists);
+const list = computed(() => store.lists);
 </script>
