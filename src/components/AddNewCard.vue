@@ -29,7 +29,7 @@ const target = ref();
 useFocus(target, { initialValue: true });
 
 const isEditing = ref(false);
-const title = ref('');
+const title = ref<string>('');
 const store = useStore();
 const { addNewCard } = store;
 
