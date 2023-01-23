@@ -2,18 +2,7 @@ import { ref, watch } from 'vue';
 import { defineStore } from 'pinia';
 import { uid } from '@/utils/uid';
 import { useRouter } from 'vue-router';
-
-interface APILists {
-  id: string;
-  title: string;
-  tasks: Tasks[];
-}
-
-interface Tasks {
-  id: string;
-  title: string;
-  content: string;
-}
+import type { APILists } from '@/types/index';
 
 const defaultList = [
   {
