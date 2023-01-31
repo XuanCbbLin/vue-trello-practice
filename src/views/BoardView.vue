@@ -25,6 +25,7 @@ import { computed } from 'vue';
 import { useStore } from '@/stores';
 import AddNewCard from '@/components/AddNewCard.vue';
 import draggable from 'vuedraggable';
+import CardWrapper from '@/components/CardWrapper.vue';
 
 const store = useStore();
 const list = computed(() => store.lists);
